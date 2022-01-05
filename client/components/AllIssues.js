@@ -16,17 +16,23 @@ class AllIssues extends React.Component {
     return (
       <div>
         <h2>All Issues</h2>
+        <Link className="create-button" to="/submitissue">
+          Add New Issue
+        </Link>
         <div>
           {issues.length === 0 ? (
             <h4>NO ISSUES TO SHOW</h4>
           ) : (
             <div>
               {issues.map(issue => {
-                const {name, id, description} = issue
+                const {name, id, severity, status} = issue
                 return (
                   <div key={id}>
-                    <h2>{name}</h2>
-                    <h2>{description}</h2>
+                    <Link to={`/issues/${id}`}>
+                      <h4>{name}</h4>
+                    </Link>
+                    <p>Severity: {severity}</p>
+                    <p>Status: {status}</p>
                   </div>
                 )
               })}
