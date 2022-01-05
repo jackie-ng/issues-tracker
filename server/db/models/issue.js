@@ -2,11 +2,6 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Issue = db.define('issue', {
-  issueId: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -41,27 +36,10 @@ const Issue = db.define('issue', {
       ]
     }
   },
-  assignee: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    defaultValue: 'Not Assigned'
-  },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: 'pictures/products/default.png'
-  },
-  createdAt: {
-    type: 'TIMESTAMP',
-    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-    allowNull: false
-  },
-  updatedAt: {
-    type: 'TIMESTAMP',
-    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-    allowNull: false
+    defaultValue: 'default.png'
   }
 })
-
-Issue.findByCategory = status => Issue.findAll({where: {status}})
 
 module.exports = Issue

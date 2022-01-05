@@ -1,4 +1,4 @@
-# Boilermaker
+# Issues Tracker
 
 _Good things come in pairs_
 
