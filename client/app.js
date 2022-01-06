@@ -1,14 +1,15 @@
 import React from 'react'
 
-import {Navbar} from './components'
+import { Navbar } from './components'
+import ResponsiveAppBar from './components/UI/AppBar'
 import Routes from './routes'
 
 const App = () => {
   return (
     <div>
-      <nav>
-        <Navbar />
-      </nav>
+    <nav>
+      <ResponsiveAppBar />
+    </nav>
       <Routes />
     </div>
   )

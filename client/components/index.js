@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-dupe-else-if
 /**
  * `components/index.js` exists simply as a 'central export' for our components.
  * This way, we can import all of our components from the same place, rather than
@@ -8,4 +9,5 @@ export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
 export {default as AllIssues} from './AllIssues'
 export {default as SingleIssue} from './SingleIssue'
-export {default as SubmitIssue} from './SubmitIssue'
+export {default as SubmitIssueForm} from './IssuesEdit/SubmitIssueForm'
+export {default as MakeCard} from './UI/MakeCard'

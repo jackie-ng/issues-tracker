@@ -10,7 +10,7 @@ const dummyIssues = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas sed sed risus pretium quam. Aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer. Lectus proin nibh nisl condimentum. Sed adipiscing diam donec adipiscing tristique risus nec.',
     severity: 'major',
     status: 'open',
-    imageUrl: 'img/uhoh.png'
+    imageUrl: '/img/uhoh.png'
   },
   {
     name: 'Login Issue',
@@ -18,7 +18,7 @@ const dummyIssues = [
       'Laoreet suspendisse interdum consectetur libero id. Faucibus pulvinar elementum integer enim neque volutpat. Lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare. Sit amet facilisis magna etiam tempor.',
     severity: 'critical',
     status: 'in progress',
-    imageUrl: 'img/uhoh.png'
+    imageUrl: '/img/uhoh.png'
   },
   {
     name: 'Cloud Migration Issue',
@@ -26,7 +26,7 @@ const dummyIssues = [
       'Magnis dis parturient montes nascetur ridiculus mus mauris vitae. Nunc sed blandit libero volutpat sed. Libero nunc consequat interdum varius sit amet mattis.',
     severity: 'show stopper',
     status: 'waiting for test',
-    imageUrl: 'img/uhoh.png'
+    imageUrl: '/img/uhoh.png'
   }
 ]
 

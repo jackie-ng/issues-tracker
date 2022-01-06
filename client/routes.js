@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-else-if */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
@@ -8,7 +9,7 @@ import {
   UserHome,
   AllIssues,
   SingleIssue,
-  SubmitIssue
+  SubmitIssueForm
 } from './components'
 import {me} from './store'
 
@@ -34,7 +35,7 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route exact path="/issues" component={AllIssues} />
             <Route path="/issues/:id" component={SingleIssue} />
-            <Route path="/submitissue" component={SubmitIssue} />
+            <Route path="/submitissueform" component={SubmitIssueForm} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

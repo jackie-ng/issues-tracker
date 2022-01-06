@@ -36,9 +36,12 @@ const Issue = db.define('issue', {
       ]
     }
   },
+  assignee: {
+    type: Sequelize.STRING
+  },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: 'default.png'
+    defaultValue: '/img/default.png'
   }
 })
 

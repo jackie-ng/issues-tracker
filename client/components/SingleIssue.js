@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-else-if */
 import React from 'react'
 import {connect} from 'react-redux'
 import history from '../history'
@@ -15,8 +16,9 @@ class SingleIssue extends React.Component {
     this.props.getIssueThunk(this.props.match.params.id)
   }
   render() {
-    // console.log('this.props.issue', this.props.issue);
+    console.log('this.props.issue', this.props.issue);
     const {issue} = this.props.issue || {}
+
     return (
       <div>
         <h2>Issue Details</h2>
