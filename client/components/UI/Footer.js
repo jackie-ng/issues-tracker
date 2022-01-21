@@ -42,7 +42,7 @@ export default function StickyFooter() {
       >
         <Container maxWidth="sm">
           <Typography variant="body1">
-            Made by Jackie Nguyen
+            Jackie Nguyen
           </Typography>
           <Copyright />
         </Container>

@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import {logout} from '../../store'
+import { logout } from '../../store'
 
 
 const ResponsiveAppBar = ({ handleClick, isLoggedIn }) => {
@@ -35,11 +35,31 @@ const ResponsiveAppBar = ({ handleClick, isLoggedIn }) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const pages = ['home', 'issues', 'users', 'dashboard', 'projects'];
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="secondary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorElNav}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            open={Boolean(anchorElNav)}
+            onClose={handleCloseNavMenu}
+            sx={{
+              display: { xs: 'block', md: 'none' },
+            }}
+          >
+          </Menu>
           <Typography
             variant="h6"
             noWrap
@@ -49,42 +69,9 @@ const ResponsiveAppBar = ({ handleClick, isLoggedIn }) => {
             Issues Tracker
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {/* {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))} */}
-            </Menu>
-          </Box>
+          {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}> */}
+
+          {/* </Box> */}
           <Typography
             variant="h6"
             noWrap
@@ -93,61 +80,47 @@ const ResponsiveAppBar = ({ handleClick, isLoggedIn }) => {
           >
             Issues Tracker
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {isLoggedIn ? (
-              <Box>
-                {/* The navbar will show these links after you log in */}
-                <Link to="/home">
-                <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                    <Button
-                      key="home"
-                      sx={{ my: 2, color: 'white', display: 'block' }}
-                    >
-                      HOME
-                    </Button>
-                  </Box>
-                </Link>
-                <Link to="/issues">
-                  <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                    <Button
-                      key="home"
-                      sx={{ my: 2, color: 'white', display: 'block' }}
-                    >
-                      ALL ISSUES
-                    </Button>
-                  </Box>
-                </Link>
+          {isLoggedIn ? (<div>
+              <Link to="/home">
+                <Button
+                  key="home"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  home
+                </Button>
+              </Link>
+              <Link to="/dashboard">
+                <Button
+                  key="home"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  dashboard
+                </Button>
+              </Link>
+              <Link to="/issues">
+                <Button
+                  key="issues"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  issues
+                </Button>
+              </Link>
+              <Link to="/users">
+                <Button
+                  key="users"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  users
+                </Button>
+              </Link>
 
-              </Box>
-            ) : (
-              <div>
-                {/* The navbar will show these links before you log in */}
-                <Link to="/login"><Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                    <Button
-                      key="home"
-                      sx={{ my: 2, color: 'white', display: 'block' }}
-                    >
-                      LOGIN
-                    </Button>
-                  </Box></Link>
-                <Link to="/signup"><Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                    <Button
-                      key="home"
-                      sx={{ my: 2, color: 'white', display: 'block' }}
-                    >
-                      SIGN UP
-                    </Button>
-                  </Box></Link>
-              </div>
-            )}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
+            {/* <Box sx={{ flexGrow: 0 }}> */}
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/img/default.png" />
+                <Avatar alt="Remy Sharp" src="/img/uhoh.png" />
               </IconButton>
             </Tooltip>
+
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -164,30 +137,61 @@ const ResponsiveAppBar = ({ handleClick, isLoggedIn }) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+
               <MenuItem key="profile" onClick={handleCloseNavMenu}>
-              <Typography textAlign="center">
+
+                <Typography textAlign="center">
                   Profile
-                  </Typography>
+                </Typography>
               </MenuItem>
+
+
               <MenuItem key="account" onClick={handleCloseNavMenu}>
-              <Typography textAlign="center">
+                <Typography textAlign="center">
                   Account
-                  </Typography>
+                </Typography>
               </MenuItem>
+
               <MenuItem key="dashboard" onClick={handleCloseNavMenu}>
-              <Typography textAlign="center">
+                <Typography textAlign="center">
                   Dashboard
-                  </Typography>
+                </Typography>
               </MenuItem>
-                <MenuItem key="logout" onClick={handleCloseNavMenu}>
-                <a href="#" onClick={handleClick}>
-                  <Typography textAlign="center">
+
+              <MenuItem key="logout" onClick={handleClick} href="#">
+                <Typography textAlign="center">
                   Logout
-                  </Typography>
-                </a>
-                </MenuItem>
+                </Typography>
+              </MenuItem>
             </Menu>
-          </Box>
+            {/* </Box> */}
+          </div>
+          ) : (
+            <Box>
+              {/* The navbar will show these links before you log in */}
+              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
+                <Link to="/login"><Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                  <Button
+                    key="home"
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    LOGIN
+                  </Button>
+                </Box>
+                </Link>
+                <Link to="/signup"><Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                  <Button
+                    key="home"
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    SIGN UP
+                  </Button>
+                </Box></Link>
+              </Box>
+            </Box>
+          )}
+
         </Toolbar>
       </Container>
     </AppBar>
@@ -216,7 +220,7 @@ export default connect(mapState, mapDispatch)(ResponsiveAppBar)
 /**
  * PROP TYPES
  */
- ResponsiveAppBar.propTypes = {
+ResponsiveAppBar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }

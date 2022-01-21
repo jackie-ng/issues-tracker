@@ -5,6 +5,7 @@ import axios from 'axios'
 const GET_ISSUES = 'GET_ISSUES'
 const GET_ISSUE = 'GET_ISSUE'
 const SUBMIT_ISSUE = 'SUBMIT_ISSUE'
+const DELETE_ISSUE = 'DELETE_ISSUE'
 /**
  * INITIAL STATE
  */
@@ -29,6 +30,10 @@ const getIssue = issue => ({
   issue
 })
 
+const deleteIssue = issue => ({
+  type: DELETE_ISSUE,
+  issue
+})
 //THUNK CREATORS
 export const getAllIssuesThunk = () => {
   return async dispatch => {
@@ -55,10 +60,23 @@ export const getIssueThunk = id => {
 export const submitNewIssueThunk = issue => {
   return async dispatch => {
     try {
-      const newIssue = (await axios.post('/api/issues', issue)).data
-      dispatch(submitNewIssue(newIssue))
+      const {data} = (await axios.post('/api/issues', issue))
+      dispatch(submitNewIssue(data))
     } catch (error) {
+      console.log('Uh Oh! There is something wrong submitting issue.');
       console.log(error)
+    }
+  }
+}
+
+export const deleteIssueThunk = id => {
+  return async dispatch => {
+    try {
+      const { data: deleted } = (await axios.delete(`/api/issues/${id}`))
+      dispatch(deleteIssue(deleted))
+    } catch (error) {
+      console.log('Uh Oh! There is something wrong deleting issue.');
+      console.log(error);
     }
   }
 }
@@ -71,6 +89,8 @@ export default function(state = initialState, action) {
       return {...state, issue: action.issue}
     case SUBMIT_ISSUE:
       return {...state, issue: action.issue}
+    case DELETE_ISSUE:
+      return {...state, issue: state.filter(({id}) => id !== action.issue)}
     default:
       return state
   }

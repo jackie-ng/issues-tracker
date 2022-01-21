@@ -5,6 +5,7 @@ const router = require('express').Router()
 
 router.use('/users', require('./users'))
 router.use('/issues', require('./issue'))
+router.use('/tasks', require('./tasks'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')

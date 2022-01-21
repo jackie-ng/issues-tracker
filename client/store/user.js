@@ -30,6 +30,17 @@ export const me = () => async dispatch => {
   }
 }
 
+export const getAllUsersThunk = () => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get('/api/users')
+      dispatch(getUser(data))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 export const auth = (email, password, method) => async dispatch => {
   let res
   try {
@@ -51,6 +62,23 @@ export const logout = () => async dispatch => {
     await axios.post('/auth/logout')
     dispatch(removeUser())
     history.push('/login')
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const isAdmin = (userId, adminStatus) => async dispatch => {
+  try {
+    await axios.put(`/api/users/${userId}`, {adminStatus})
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const deleteUserThunk = userId => async dispatch => {
+  try {
+    await axios.delete(`/api/users/`, {params: {id: userId}})
+    dispatch(deleteUser(userId))
   } catch (err) {
     console.error(err)
   }

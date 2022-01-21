@@ -9,10 +9,9 @@ import { Link } from 'react-router-dom'
  ***/
 import Button from '@mui/material/Button'
 import StickyFooter from './UI/Footer'
-import { withStyles } from '@mui/styles/withStyles'
-import { Grid } from '@mui/material'
-import MakeCard from './UI/MakeCard'
-import { Typography } from '@mui/material'
+import { Typography, Box, Grid } from '@mui/material'
+import { experimentalStyled as styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
 
 const styles = theme => ({
   root: {
@@ -22,6 +21,13 @@ const styles = theme => ({
     alignItems: 'baseline'
   }
 })
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 class AllIssues extends React.Component {
   componentDidMount() {
@@ -35,26 +41,54 @@ class AllIssues extends React.Component {
     return (
       <div>
         <Typography variant="h2" color="initial" align="center" gutterBottom>All Issues</Typography>
-        <Link to="/submitissueform">
-          <Button variant="outlined" color="secondary">Submit New Issue</Button>
-        </Link>
-        <Grid container justify="center" spacing={16}>
+
+        <Grid container
+          direction="row"
+          justifyContent="center"
+          alignItems="baseline">
           {issues.length === 0 ? (
             <h4>NO ISSUES TO SHOW</h4>
           ) : (
-            <Grid key={issues.id} item>
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} key={issues.id}>
               {issues.map(issue => {
                 const { name, id, severity, status } = issue
                 return (
-                  <MakeCard
+                  <Grid item xs={2} sm={4} md={4} key={id}>
+                    {/* <MakeCard
                     key={id}
                     id={id}
                     name={name}
                     severity={severity}
                     status={status} >
-                  </MakeCard>
+                  </MakeCard> */}
+                    <Item>
+                      <Typography gutterBottom variant="h5" component="h2">{name}</Typography>
+                      <Typography gutterBottom variant="p" component="h3" color="red">{severity}</Typography>
+                      <Typography gutterBottom variant="p" component="h3" color="teal">{status}</Typography>
+                      <Button
+                        onClick={() =>
+                          history.push(`/issues/${id}`)
+                        }
+                        size="small"
+                        color="primary"
+                      >
+                        Details
+                      </Button>
+                    </Item>
+                  </Grid>
+
                 )
               })}
+              <Grid item xs={2} sm={4} md={4} key='new issue'>
+              <Link to="/submitissueform">
+              <Item>
+                <Typography gutterBottom variant="h5" component="h2" color="primary">
+
+            Submit New Issue
+                </Typography>
+              </Item>
+          </Link>
+              </Grid>
             </Grid>
           )}
         </Grid>

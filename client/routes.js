@@ -9,9 +9,12 @@ import {
   UserHome,
   AllIssues,
   SingleIssue,
-  SubmitIssueForm
+  SubmitIssueForm,
+  Dashboard
 } from './components'
+// import Dashboard from './components'
 import {me} from './store'
+import AllUsers from './components/Admin/AllUsers'
 
 /**
  * COMPONENT
@@ -36,6 +39,8 @@ class Routes extends Component {
             <Route exact path="/issues" component={AllIssues} />
             <Route path="/issues/:id" component={SingleIssue} />
             <Route path="/submitissueform" component={SubmitIssueForm} />
+            <Route path="/users" component={AllUsers} />
+            <Route path="/dashboard" component={Dashboard} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

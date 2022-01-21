@@ -1,25 +1,16 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Issue = db.define('issue', {
+var Task = db.define('Task', {
   name: {
     type: Sequelize.STRING,
+    allowNull: false,
     allowNull: false,
   },
   description: {
     type: Sequelize.TEXT,
     allowNull: true,
     validate: { notEmpty: true }
-  },
-  severity: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isIn: {
-        args: [['Minor', 'Major', 'Critical', 'Show Stopper']],
-        msg: "must be the right severity value"
-      }
-    }
   },
   status: {
     type: Sequelize.STRING,
@@ -39,10 +30,6 @@ const Issue = db.define('issue', {
     msg: "must be the right status value"}
     }
   },
-  imageUrl: {
-    type: Sequelize.STRING,
-    defaultValue: '/img/uhoh.png'
-  }
 })
 
-module.exports = Issue
+module.exports = Task
