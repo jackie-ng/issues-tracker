@@ -1,17 +1,16 @@
 const express = require('express')
 const router = express.Router()
-const {Issue} = require('../db/models')
-// const Sequelize = require('sequelize')
+const Sequelize = require('sequelize')
 // const adminAuth = require('../customMiddleware')
 
-// api/issues
-router.get('/', async (req, res, next) => {
-  try {
-    let issues = await Issue.findAll()
-    res.json(issues)
-  } catch (error) {
-    next(error)
-  }
-})
+// api/
+// router.get('/', async (req, res, next) => {
+//   try {
+//     let issues = await Issue.findAll()
+//     res.json(issues)
+//   } catch (error) {
+//     next(error)
+//   }
+// })
 
 module.exports = router

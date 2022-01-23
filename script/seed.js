@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const { User, Issue } = require('../server/db/models')
+const { User, Issue, Project } = require('../server/db/models')
 
 const dummyIssues = [
   {
@@ -30,11 +30,35 @@ const dummyIssues = [
   }
 ]
 
+const dummyProjects = [
+  {
+    name: 'Project 1',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  },
+  {
+    name: 'Project 2',
+    description: 'Malesuada bibendum arcu vitae elementum curabitur vitae nunc.'
+  },
+  {
+    name: 'Project 3',
+    description: 'Ultrices neque ornare aenean euismod.'
+  },
+  {
+    name: 'Project 4',
+    description: 'Ultricies mi quis hendrerit dolor magna eget est lorem ipsum.'
+  },
+  {
+    name: 'Project 5',
+    description: 'Magnis dis parturient montes nascetur ridiculus.'
+  },
+]
+
 const dummyUsers = [
   {
     name: 'Cody',
     email: 'cody@email.com',
-    password: '123'
+    password: '123',
+    isAdmin: true
   },
   {
     name: 'Murphy',
@@ -58,6 +82,9 @@ async function seed() {
       }),
       dummyUsers.map(user => {
         return User.create(user)
+      }),
+      dummyProjects.map(project => {
+        return Project.create(project)
       })
     )
   } catch (error) {

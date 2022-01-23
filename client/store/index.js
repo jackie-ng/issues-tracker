@@ -7,7 +7,8 @@ import issues from './issue'
 
 const reducer = combineReducers({
   user,
-  issues
+  issues,
+  // projects,
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

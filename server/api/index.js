@@ -1,11 +1,11 @@
 /* eslint-disable linebreak-style */
-
-'use strict'
 const router = require('express').Router()
+module.exports = router
 
+router.use('/dashboard', require('./dashboard'))
 router.use('/users', require('./users'))
-router.use('/issues', require('./issue'))
-router.use('/tasks', require('./tasks'))
+router.use('/issues', require('./issues'))
+router.use('/projects', require('./projects'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')
@@ -13,4 +13,4 @@ router.use((req, res, next) => {
   next(error)
 })
 
-module.exports = router
+
