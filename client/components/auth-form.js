@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { auth } from '../store'
 import StickyFooter from './UI/Footer'
 import { Typography, Container, Button, TextField, Box, Grid } from '@mui/material'
-
+import ResponsiveAppBar from './UI/AppBar'
 /**
  * COMPONENT
  */
@@ -14,6 +14,7 @@ const AuthForm = props => {
 
   return (
     <div>
+    <ResponsiveAppBar/>
       <Container component="main" maxWidth="xs">
         <Box
           sx={{

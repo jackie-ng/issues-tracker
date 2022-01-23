@@ -8,9 +8,9 @@ import ResponsiveAppBar from './UI/AppBar'
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <h1>issues tracker</h1>
-    <nav>
+    {/* <nav>
       <ResponsiveAppBar/>
-    </nav>
+    </nav> */}
     <hr />
   </div>
 )

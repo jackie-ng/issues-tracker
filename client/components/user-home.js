@@ -1,18 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { Typography, Container, Grid } from '@mui/material'
+import ResponsiveAppBar from './UI/AppBar'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email, name} = props
+  const { email, name } = props
 
   return (
-    <Container fixed align="center">
-      <Typography variant="h2" color="initial" justifyContent="center" gutterBottom>Welcome, {name}!</Typography>
-    </Container>
+    <>
+      <ResponsiveAppBar />
+      <Container fixed align="center">
+        <Typography variant="h2" color="initial" justifyContent="center" gutterBottom>Welcome, {name}!</Typography>
+      </Container>
+    </>
   )
 }
 

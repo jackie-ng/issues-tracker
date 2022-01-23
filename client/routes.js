@@ -10,11 +10,11 @@ import {
   AllIssues,
   SingleIssue,
   SubmitIssueForm,
-  Dashboard
 } from './components'
-// import Dashboard from './components'
+import Dashboard from './components/Dashboard/Dashboard'
 import {me} from './store'
 import AllUsers from './components/Admin/AllUsers'
+import AllProjects from './components/Projects/AllProjects'
 
 /**
  * COMPONENT
@@ -36,6 +36,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route path="/projects" component={AllProjects} />
             <Route exact path="/issues" component={AllIssues} />
             <Route path="/issues/:id" component={SingleIssue} />
             <Route path="/submitissueform" component={SubmitIssueForm} />

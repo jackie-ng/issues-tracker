@@ -15,7 +15,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { logout } from '../../store'
+import history from '../../history';
 
+const pages = ['Home', 'Projects', 'Calendar', 'To-do'];
+const settings = ['Profile', 'Account', 'Dashboard', 'Settings'];
 
 const ResponsiveAppBar = ({ handleClick, isLoggedIn }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,92 +38,84 @@ const ResponsiveAppBar = ({ handleClick, isLoggedIn }) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const pages = ['home', 'issues', 'users', 'dashboard', 'projects'];
 
   return (
-    <AppBar position="static" color="secondary">
+    <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorElNav}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-            open={Boolean(anchorElNav)}
-            onClose={handleCloseNavMenu}
-            sx={{
-              display: { xs: 'block', md: 'none' },
-            }}
-          >
-          </Menu>
+        {isLoggedIn && (
+          <>
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            Issues Tracker
+            PROJE(C)T
           </Typography>
 
-          {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}> */}
-
-          {/* </Box> */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={() => history.push(`/${page.toLowerCase()}`)}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            Issues Tracker
+            PROJE(C)T
           </Typography>
-          {isLoggedIn ? (<div>
-              <Link to="/home">
-                <Button
-                  key="home"
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  home
-                </Button>
-              </Link>
-              <Link to="/dashboard">
-                <Button
-                  key="home"
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  dashboard
-                </Button>
-              </Link>
-              <Link to="/issues">
-                <Button
-                  key="issues"
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  issues
-                </Button>
-              </Link>
-              <Link to="/users">
-                <Button
-                  key="users"
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  users
-                </Button>
-              </Link>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={() => history.push(`/${page.toLowerCase()}`)}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {page}
+              </Button>
+            ))}
+          </Box>
 
-            {/* <Box sx={{ flexGrow: 0 }}> */}
+          <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/img/uhoh.png" />
+                <Avatar alt="UhOh" src="/img/uhoh.png" />
               </IconButton>
             </Tooltip>
-
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -137,41 +132,42 @@ const ResponsiveAppBar = ({ handleClick, isLoggedIn }) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-
-              <MenuItem key="profile" onClick={handleCloseNavMenu}>
-
-                <Typography textAlign="center">
-                  Profile
-                </Typography>
-              </MenuItem>
-
-
-              <MenuItem key="account" onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">
-                  Account
-                </Typography>
-              </MenuItem>
-
-              <MenuItem key="dashboard" onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">
-                  Dashboard
-                </Typography>
-              </MenuItem>
-
-              <MenuItem key="logout" onClick={handleClick} href="#">
-                <Typography textAlign="center">
-                  Logout
-                </Typography>
-              </MenuItem>
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={() => history.push(`/${setting.toLowerCase()}`)}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+              ))}
+              <MenuItem key='logout' onClick={handleClick} href='#'>
+                  <Typography textAlign="center">Logout</Typography>
+                </MenuItem>
             </Menu>
-            {/* </Box> */}
-          </div>
-          ) : (
-            <Box>
-              {/* The navbar will show these links before you log in */}
-              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          </Box>
+          </>
+        )}
 
-                <Link to="/login"><Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          {!isLoggedIn && (
+            //               {/* The navbar will show these links before you log in */}
+            <>
+            <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+          >
+            PROJE(C)T
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { md: 'none', lg: 'flex' }, flexDirection: 'row-reverse' }}>
+              <Link to="/signup"><Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                <Button
+                  key="home"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  SIGN UP
+                </Button>
+              </Box>
+              </Link>
+              <Link to="/login">
+                <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                   <Button
                     key="home"
                     sx={{ my: 2, color: 'white', display: 'block' }}
@@ -179,19 +175,11 @@ const ResponsiveAppBar = ({ handleClick, isLoggedIn }) => {
                     LOGIN
                   </Button>
                 </Box>
-                </Link>
-                <Link to="/signup"><Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                  <Button
-                    key="home"
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                  >
-                    SIGN UP
-                  </Button>
-                </Box></Link>
-              </Box>
+              </Link>
             </Box>
-          )}
+            </>
 
+          )}
         </Toolbar>
       </Container>
     </AppBar>

@@ -1,7 +1,7 @@
 const User = require('./user')
 const Issue = require('./issue')
 const Project = require('./project')
-const Task = require('./task')
+const Member = require('./member')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -19,12 +19,14 @@ User.hasMany(Issue)
 Issue.belongsTo(Project)
 Project.hasMany(Issue)
 
-// Task and User
-Task.belongsTo(User)
-User.hasMany(Task)
+//User and Member
+Member.belongsTo(User)
 
-//Issue and Task
-Task.belongsTo(Issue)
+//Member and Project
+Member.belongsTo(Project)
+Project.hasMany(Member)
+
+
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -35,7 +37,6 @@ Task.belongsTo(Issue)
 module.exports = {
   User,
   Issue,
-  Task,
-  Project,
-  UserIssues
+  Member,
+  Project
 }
